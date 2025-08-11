@@ -4,9 +4,15 @@ import {defineConfig} from 'vite';
 export default defineConfig({
   envDir: '../',
   server: {
+    // Allow Cloudflare Tunnel hostnames to access the Vite dev server
+    // Include the current tunnel hostname and a wildcard for future runs
+    allowedHosts: [
+      '.trycloudflare.com',
+      'vote-how-minimal-pgp.trycloudflare.com',
+    ],
     proxy: {
       '/api': {
-        target: 'http://localhost:3001',
+        target: 'http://localhost:5173',
         changeOrigin: true,
         secure: false,
         ws: true,
